@@ -23,10 +23,13 @@ class PlaySoundsViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         do {
-        try player = AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl!)
+            try AVAudioSession.sharedInstance().overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
+            try player = AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl!)
             player?.enableRate = true
+        
         } catch {}
         audioEngine = AVAudioEngine()
+        
         audioFile = try! AVAudioFile(forReading: receivedAudio.filePathUrl)
     }
 
